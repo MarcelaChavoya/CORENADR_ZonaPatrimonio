@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="data/Tipodesuelo_1.js"></script>
+        <script src="data/Precipitacinmediaanual_2.js"></script>
+        <script src="data/Temperaturamediaanual_3.js"></script>
+        <script src="data/ZonaPatrimonio_4.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[19.191078108375716,-99.11348723683027],[19.319276124613378,-98.9400800558035]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_GoogleSatellite_0');
+        map.getPane('pane_GoogleSatellite_0').style.zIndex = 400;
+        var layer_GoogleSatellite_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleSatellite_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+        });
+        layer_GoogleSatellite_0;
+        map.addLayer(layer_GoogleSatellite_0);
+        function pop_Tipodesuelo_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Tipo de Suelo</th>\
+                        <td>' + (feature.properties['Tipo de Suelo'] !== null ? autolinker.link(feature.properties['Tipo de Suelo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Tipodesuelo_1_0(feature) {
+            switch(String(feature.properties['Tipo de Suelo'])) {
+                case 'FEOZEM HAPLICO':
+                    return {
+                pane: 'pane_Tipodesuelo_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(166,97,26,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'FLUVISOL EUTRICO':
+                    return {
+                pane: 'pane_Tipodesuelo_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(166,97,26,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'GLEYSOL MOLICO':
+                    return {
+                pane: 'pane_Tipodesuelo_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(223,194,125,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'HISTOSOL EUTRICO':
+                    return {
+                pane: 'pane_Tipodesuelo_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(223,194,125,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'REGOSOL EUTRICO':
+                    return {
+                pane: 'pane_Tipodesuelo_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(128,205,193,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'SOLONCHAK GLEYICO':
+                    return {
+                pane: 'pane_Tipodesuelo_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(128,205,193,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'SOLONCHAK MOLICO':
+                    return {
+                pane: 'pane_Tipodesuelo_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(1,133,113,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Tipodesuelo_1');
+        map.getPane('pane_Tipodesuelo_1').style.zIndex = 401;
+        map.getPane('pane_Tipodesuelo_1').style['mix-blend-mode'] = 'normal';
+        var layer_Tipodesuelo_1 = new L.geoJson(json_Tipodesuelo_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Tipodesuelo_1',
+            layerName: 'layer_Tipodesuelo_1',
+            pane: 'pane_Tipodesuelo_1',
+            onEachFeature: pop_Tipodesuelo_1,
+            style: style_Tipodesuelo_1_0,
+        });
+        bounds_group.addLayer(layer_Tipodesuelo_1);
+        map.addLayer(layer_Tipodesuelo_1);
+        function pop_Precipitacinmediaanual_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">mm</th>\
+                        <td>' + (feature.properties['mm'] !== null ? autolinker.link(feature.properties['mm'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Precipitacinmediaanual_2_0(feature) {
+            if (feature.properties['mm'] >= 750.000000 && feature.properties['mm'] <= 773.333333 ) {
+                return {
+                pane: 'pane_Precipitacinmediaanual_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(53,87,133,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['mm'] >= 773.333333 && feature.properties['mm'] <= 784.666667 ) {
+                return {
+                pane: 'pane_Precipitacinmediaanual_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(53,123,163,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['mm'] >= 784.666667 && feature.properties['mm'] <= 813.000000 ) {
+                return {
+                pane: 'pane_Precipitacinmediaanual_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(222,245,229,1.0)',
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('pane_Precipitacinmediaanual_2');
+        map.getPane('pane_Precipitacinmediaanual_2').style.zIndex = 402;
+        map.getPane('pane_Precipitacinmediaanual_2').style['mix-blend-mode'] = 'normal';
+        var layer_Precipitacinmediaanual_2 = new L.geoJson(json_Precipitacinmediaanual_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Precipitacinmediaanual_2',
+            layerName: 'layer_Precipitacinmediaanual_2',
+            pane: 'pane_Precipitacinmediaanual_2',
+            onEachFeature: pop_Precipitacinmediaanual_2,
+            style: style_Precipitacinmediaanual_2_0,
+        });
+        bounds_group.addLayer(layer_Precipitacinmediaanual_2);
+        map.addLayer(layer_Precipitacinmediaanual_2);
+        function pop_Temperaturamediaanual_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">°C</th>\
+                        <td>' + (feature.properties['°C'] !== null ? autolinker.link(feature.properties['°C'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Temperaturamediaanual_3_0(feature) {
+            if (feature.properties['°C'] >= 16.000000 && feature.properties['°C'] <= 16.100000 ) {
+                return {
+                pane: 'pane_Temperaturamediaanual_3',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,245,240,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['°C'] >= 16.100000 && feature.properties['°C'] <= 16.200000 ) {
+                return {
+                pane: 'pane_Temperaturamediaanual_3',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(251,112,80,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['°C'] >= 16.200000 && feature.properties['°C'] <= 16.300000 ) {
+                return {
+                pane: 'pane_Temperaturamediaanual_3',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(103,0,13,1.0)',
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('pane_Temperaturamediaanual_3');
+        map.getPane('pane_Temperaturamediaanual_3').style.zIndex = 403;
+        map.getPane('pane_Temperaturamediaanual_3').style['mix-blend-mode'] = 'normal';
+        var layer_Temperaturamediaanual_3 = new L.geoJson(json_Temperaturamediaanual_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Temperaturamediaanual_3',
+            layerName: 'layer_Temperaturamediaanual_3',
+            pane: 'pane_Temperaturamediaanual_3',
+            onEachFeature: pop_Temperaturamediaanual_3,
+            style: style_Temperaturamediaanual_3_0,
+        });
+        bounds_group.addLayer(layer_Temperaturamediaanual_3);
+        map.addLayer(layer_Temperaturamediaanual_3);
+        function pop_ZonaPatrimonio_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">fid</th>\
+                        <td>' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ID</th>\
+                        <td>' + (feature.properties['ID'] !== null ? autolinker.link(feature.properties['ID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Nombre</th>\
+                        <td>' + (feature.properties['Nombre'] !== null ? autolinker.link(feature.properties['Nombre'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Zona</th>\
+                        <td>' + (feature.properties['Zona'] !== null ? autolinker.link(feature.properties['Zona'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pgoedf</th>\
+                        <td>' + (feature.properties['Pgoedf'] !== null ? autolinker.link(feature.properties['Pgoedf'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Clave_PGOE</th>\
+                        <td>' + (feature.properties['Clave_PGOE'] !== null ? autolinker.link(feature.properties['Clave_PGOE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Entidad</th>\
+                        <td>' + (feature.properties['Entidad'] !== null ? autolinker.link(feature.properties['Entidad'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Alcaldía</th>\
+                        <td>' + (feature.properties['Alcaldía'] !== null ? autolinker.link(feature.properties['Alcaldía'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ANP</th>\
+                        <td>' + (feature.properties['ANP'] !== null ? autolinker.link(feature.properties['ANP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">PDU_OFICIA</th>\
+                        <td>' + (feature.properties['PDU_OFICIA'] !== null ? autolinker.link(feature.properties['PDU_OFICIA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">PDU_PGOEDF</th>\
+                        <td>' + (feature.properties['PDU_PGOEDF'] !== null ? autolinker.link(feature.properties['PDU_PGOEDF'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">PGOEDF_CRU</th>\
+                        <td>' + (feature.properties['PGOEDF_CRU'] !== null ? autolinker.link(feature.properties['PGOEDF_CRU'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Núcleo Agrario</th>\
+                        <td>' + (feature.properties['Núcleo Agrario'] !== null ? autolinker.link(feature.properties['Núcleo Agrario'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Ociosa</th>\
+                        <td>' + (feature.properties['Ociosa'] !== null ? autolinker.link(feature.properties['Ociosa'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Paraje</th>\
+                        <td>' + (feature.properties['Paraje'] !== null ? autolinker.link(feature.properties['Paraje'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Colonia</th>\
+                        <td>' + (feature.properties['Colonia'] !== null ? autolinker.link(feature.properties['Colonia'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">AHI</th>\
+                        <td>' + (feature.properties['AHI'] !== null ? autolinker.link(feature.properties['AHI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pueblo Originario</th>\
+                        <td>' + (feature.properties['Pueblo Originario'] !== null ? autolinker.link(feature.properties['Pueblo Originario'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Uso Suelo</th>\
+                        <td>' + (feature.properties['Uso Suelo'] !== null ? autolinker.link(feature.properties['Uso Suelo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_ZonaPatrimonio_4_0() {
+            return {
+                pane: 'pane_ZonaPatrimonio_4',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(220,240,234,0.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_ZonaPatrimonio_4');
+        map.getPane('pane_ZonaPatrimonio_4').style.zIndex = 404;
+        map.getPane('pane_ZonaPatrimonio_4').style['mix-blend-mode'] = 'normal';
+        var layer_ZonaPatrimonio_4 = new L.geoJson(json_ZonaPatrimonio_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_ZonaPatrimonio_4',
+            layerName: 'layer_ZonaPatrimonio_4',
+            pane: 'pane_ZonaPatrimonio_4',
+            onEachFeature: pop_ZonaPatrimonio_4,
+            style: style_ZonaPatrimonio_4_0,
+        });
+        bounds_group.addLayer(layer_ZonaPatrimonio_4);
+        map.addLayer(layer_ZonaPatrimonio_4);
+        var osmGeocoder = new L.Control.Geocoder({
+            collapsed: true,
+            position: 'topleft',
+            text: 'Search',
+            title: 'Testing'
+        }).addTo(map);
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .className += ' fa fa-search';
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .title += 'Search for a place';
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/ZonaPatrimonio_4.png" /> Zona Patrimonio': layer_ZonaPatrimonio_4,'Temperatura media anual<br /><table><tr><td style="text-align: center;"><img src="legend/Temperaturamediaanual_3_161610.png" /></td><td>16 - 16.1</td></tr><tr><td style="text-align: center;"><img src="legend/Temperaturamediaanual_3_1611621.png" /></td><td>16.1 - 16.2</td></tr><tr><td style="text-align: center;"><img src="legend/Temperaturamediaanual_3_1621632.png" /></td><td>16.2 - 16.3</td></tr></table>': layer_Temperaturamediaanual_3,'Precipitación media anual<br /><table><tr><td style="text-align: center;"><img src="legend/Precipitacinmediaanual_2_7507730.png" /></td><td>750 - 773</td></tr><tr><td style="text-align: center;"><img src="legend/Precipitacinmediaanual_2_7737851.png" /></td><td>773 - 785</td></tr><tr><td style="text-align: center;"><img src="legend/Precipitacinmediaanual_2_7858132.png" /></td><td>785 - 813</td></tr></table>': layer_Precipitacinmediaanual_2,'Tipo de suelo<br /><table><tr><td style="text-align: center;"><img src="legend/Tipodesuelo_1_FEOZEMHAPLICO0.png" /></td><td>FEOZEM HAPLICO</td></tr><tr><td style="text-align: center;"><img src="legend/Tipodesuelo_1_FLUVISOLEUTRICO1.png" /></td><td>FLUVISOL EUTRICO</td></tr><tr><td style="text-align: center;"><img src="legend/Tipodesuelo_1_GLEYSOLMOLICO2.png" /></td><td>GLEYSOL MOLICO</td></tr><tr><td style="text-align: center;"><img src="legend/Tipodesuelo_1_HISTOSOLEUTRICO3.png" /></td><td>HISTOSOL EUTRICO</td></tr><tr><td style="text-align: center;"><img src="legend/Tipodesuelo_1_REGOSOLEUTRICO4.png" /></td><td>REGOSOL EUTRICO</td></tr><tr><td style="text-align: center;"><img src="legend/Tipodesuelo_1_SOLONCHAKGLEYICO5.png" /></td><td>SOLONCHAK GLEYICO</td></tr><tr><td style="text-align: center;"><img src="legend/Tipodesuelo_1_SOLONCHAKMOLICO6.png" /></td><td>SOLONCHAK MOLICO</td></tr></table>': layer_Tipodesuelo_1,"Google Satellite": layer_GoogleSatellite_0,}).addTo(map);
+        setBounds();
+        </script>
+    </body>
+</html>
